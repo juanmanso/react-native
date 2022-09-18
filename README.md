@@ -17,7 +17,9 @@ npx create-react-native-app -t with-typescript react-native
 </p>
 
 > This file is part of https://www.github.com/juanmanso/react-native (from now
-on to be referred as "_RN Repository_").
+on to be referred as "_RN Repository_"). The code of this repository is made
+available under the GPL v3 license. Some of the dependencies might be licensed
+differently with the BSD or MIT license, for example.
 >
 > _RN Repository_ is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free
@@ -31,4 +33,3 @@ details.
 >
 > You should have received a copy of the GNU General Public License along with
 _RN Repository_. If not, see <https://www.gnu.org/licenses/>.
-
