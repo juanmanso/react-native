@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  useSharedValue,
+  withRepeat,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { LoadingGradient, PlaygroundButton } from 'src/components/atoms';
 
 interface IMainScreen extends NativeStackScreenProps<any, any> {}
 
 export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
+  const progress = useSharedValue(0);
+
+  useEffect(() => {
+    progress.value = withRepeat(withTiming(1, { duration: 5000 }), -1);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Button components</Text>
@@ -16,7 +27,7 @@ export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
       </PlaygroundButton>
       <View style={styles.separator} />
       <View style={styles.buttonLikeContainer}>
-        <LoadingGradient />
+        <LoadingGradient progress={progress} />
         <Text style={styles.label}>LoadingGradient</Text>
       </View>
       <View style={styles.separator} />
