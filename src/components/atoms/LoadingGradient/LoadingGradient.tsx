@@ -2,13 +2,35 @@ import React, { useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export const LoadingGradient: React.FC = () => {
+import { TColor } from 'src/types';
+
+interface ILoadingGradient {
+  color?: TColor;
+  opacity?: number;
+}
+
+const DEFAULT_COLOR = '#E9FFE0';
+const DEFAULT_OPACITY = 0.2;
+
+export const LoadingGradient: React.FC<ILoadingGradient> = ({
+  color = DEFAULT_COLOR,
+  opacity = DEFAULT_OPACITY,
+}) => {
   const [height, setHeight] = useState(1);
   const [width, setWidth] = useState(1);
   const aspectRatio = width / height;
   const x_static = 0.3;
   const y_static = -aspectRatio * x_static + 0.1;
 
+  // Colors to be used in the gradient
+  const colors = [
+    color + '00',
+    color + 'D0', // Opacity 81,25%
+    color + 'E0', // Opacity 87,50%
+    color + '00',
+  ];
+
+  // Callback functions
   const getLayout = (event: LayoutChangeEvent) => {
     const h = event.nativeEvent.layout.height;
     const w = event.nativeEvent.layout.width;
@@ -21,13 +43,8 @@ export const LoadingGradient: React.FC = () => {
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: x_static, y: y_static }}
-        colors={[
-          styles.loadingGradientTheme.color + '00',
-          styles.loadingGradientTheme.color + 'D0', // Opacity 81,25%
-          styles.loadingGradientTheme.color + 'E0', // Opacity 87,50%
-          styles.loadingGradientTheme.color + '00',
-        ]}
-        style={styles.loadingGradient}
+        colors={colors}
+        style={[styles.loadingGradient, { opacity }]}
       />
     </View>
   );
@@ -46,9 +63,5 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.2,
-  },
-  loadingGradientTheme: {
-    color: '#E9FFE0',
   },
 });
