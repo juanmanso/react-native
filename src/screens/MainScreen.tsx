@@ -8,6 +8,7 @@ import {
 } from 'react-native-reanimated';
 
 import { LoadingGradient, PlaygroundButton } from 'src/components/atoms';
+import { LoadingPressable } from 'src/components/molecules';
 
 interface IMainScreen extends NativeStackScreenProps<any, any> {}
 
@@ -30,6 +31,13 @@ export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
         <LoadingGradient progress={progress} />
         <Text style={styles.label}>LoadingGradient</Text>
       </View>
+      <View style={styles.separator} />
+      <LoadingPressable
+        onPress={() => alert('LoadingPressable pressed')}
+        style={styles.loadingPressable}
+      >
+        <Text style={styles.label}>LoadingPressable</Text>
+      </LoadingPressable>
       <View style={styles.separator} />
       <View style={styles.separator} />
       <Text style={styles.header}>Screens</Text>
@@ -67,5 +75,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#113A77',
+  },
+  loadingPressable: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 58,
+    borderRadius: 20,
+    padding: 10,
   },
 });
