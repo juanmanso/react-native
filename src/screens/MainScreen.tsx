@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { PlaygroundButton } from 'src/components/atoms';
+
 export const MainScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <PlaygroundButton onPress={() => alert('PlaygroundButton pressed')}>
+        <Text>PlayGroundButton</Text>
+      </PlaygroundButton>
     </View>
   );
 };
