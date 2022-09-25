@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { PlaygroundButton } from 'src/components/atoms';
+import { LoadingGradient, PlaygroundButton } from 'src/components/atoms';
 
 interface IMainScreen extends NativeStackScreenProps<any, any> {}
 
@@ -14,6 +14,11 @@ export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
       <PlaygroundButton onPress={() => alert('PlaygroundButton pressed')}>
         <Text>PlayGroundButton</Text>
       </PlaygroundButton>
+      <View style={styles.separator} />
+      <View style={styles.buttonLikeContainer}>
+        <LoadingGradient />
+        <Text style={styles.label}>LoadingGradient</Text>
+      </View>
       <View style={styles.separator} />
       <View style={styles.separator} />
       <Text style={styles.header}>Screens</Text>
@@ -40,5 +45,16 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginVertical: 8,
+  },
+  label: {
+    color: '#fff',
+  },
+  buttonLikeContainer: {
+    width: 200,
+    height: 70,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#113A77',
   },
 });
