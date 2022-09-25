@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Animated, {
+  interpolate,
+  SharedValue,
+  useAnimatedStyle,
+  useDerivedValue,
+} from 'react-native-reanimated';
 
 import { TColor } from 'src/types';
 
 interface ILoadingGradient {
   color?: TColor;
   opacity?: number;
+  progress?: SharedValue<number>;
 }
 
 const DEFAULT_COLOR = '#E9FFE0';
 const DEFAULT_OPACITY = 0.2;
+const DEFAULT_PROGRESS = { value: 0 }; // If no progress given, do not show
+
+const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
 export const LoadingGradient: React.FC<ILoadingGradient> = ({
   color = DEFAULT_COLOR,
   opacity = DEFAULT_OPACITY,
+  progress = DEFAULT_PROGRESS,
 }) => {
   const [height, setHeight] = useState(1);
   const [width, setWidth] = useState(1);
@@ -30,6 +41,21 @@ export const LoadingGradient: React.FC<ILoadingGradient> = ({
     color + '00',
   ];
 
+  // Animation
+  const loadingSlide = useDerivedValue(() =>
+    interpolate(progress.value, [0, 1], [-height * 3, height * 3])
+  );
+  const animatedStyle = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          translateX: loadingSlide.value,
+        },
+      ],
+    }),
+    []
+  );
+
   // Callback functions
   const getLayout = (event: LayoutChangeEvent) => {
     const h = event.nativeEvent.layout.height;
@@ -40,11 +66,11 @@ export const LoadingGradient: React.FC<ILoadingGradient> = ({
 
   return (
     <View onLayout={getLayout} style={styles.container}>
-      <LinearGradient
+      <AnimatedLinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: x_static, y: y_static }}
         colors={colors}
-        style={[styles.loadingGradient, { opacity }]}
+        style={[styles.loadingGradient, { opacity }, { ...animatedStyle }]}
       />
     </View>
   );
