@@ -1,4 +1,19 @@
 {
-  "compilerOptions": {},
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "paths": {
+      "src": ["./src"]
+    }
+  },
+  "include": ["./src"],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    ".eslintrc.js"
+  ]
 }
