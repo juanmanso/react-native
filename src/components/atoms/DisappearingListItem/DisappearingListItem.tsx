@@ -1,28 +1,44 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 import { IDisappearingListItem } from './DisappearingListItem.types';
+import { useDisappearingListItem } from './DisappearingListItem.hooks';
 
 const MARGIN_BOTTOM = 16;
 
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 export const DisappearingListItem: React.FC<IDisappearingListItem> = ({
+  animationSharedValue,
   height,
   index,
   item,
+  listHeight,
 }) => {
+  const { animatedStyle } = useDisappearingListItem(
+    height,
+    listHeight,
+    index,
+    animationSharedValue
+  );
+
   return (
-    <Pressable
+    <AnimatedPressable
       key={index}
       style={[
         styles.container,
-        { height: height - MARGIN_BOTTOM, marginBottom: MARGIN_BOTTOM },
+        { height: height - MARGIN_BOTTOM },
+        { ...animatedStyle },
       ]}
     >
       <Text>{item.title}</Text>
-    </Pressable>
+    </AnimatedPressable>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginBottom: MARGIN_BOTTOM,
+  },
 });
