@@ -1,6 +1,6 @@
 import { SharedValue } from 'react-native-reanimated';
 
-type TItem = {
+export type TItem = {
   title: string;
 };
 
