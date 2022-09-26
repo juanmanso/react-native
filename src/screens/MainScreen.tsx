@@ -45,6 +45,12 @@ export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
       <PlaygroundButton onPress={() => navigation.navigate('AuroraScreen')}>
         <Text>AuroraScreen</Text>
       </PlaygroundButton>
+      <View style={styles.separator} />
+      <PlaygroundButton
+        onPress={() => navigation.navigate('DisappearingListScreen')}
+      >
+        <Text>DisappearingListScreen</Text>
+      </PlaygroundButton>
     </View>
   );
 };

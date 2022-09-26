@@ -32,7 +32,7 @@ export const DisappearingListItem: React.FC<IDisappearingListItem> = ({
         { ...animatedStyle },
       ]}
     >
-      <Text>{item.title}</Text>
+      <Text style={styles.label}>{item.title}</Text>
     </AnimatedPressable>
   );
 };
@@ -40,5 +40,12 @@ export const DisappearingListItem: React.FC<IDisappearingListItem> = ({
 const styles = StyleSheet.create({
   container: {
     marginBottom: MARGIN_BOTTOM,
+    backgroundColor: '#557FFF',
+    justifyContent: 'center',
+    padding: 16,
+    borderRadius: 16,
+  },
+  label: {
+    color: '#fff',
   },
 });
