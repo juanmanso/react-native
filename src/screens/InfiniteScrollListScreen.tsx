@@ -1,17 +1,18 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import {InfiniteScrollList} from 'src/components/molecules';
-
-const DATA = [...Array(9).keys()].map(item => ({title: `item number ${item}`}));
+import { InfiniteScrollList } from 'src/components/molecules';
+import { useInfiniteScrollList } from 'src/components/molecules/InfiniteScrollList/InfiniteScrollList.hooks';
 
 export const InfiniteScrollListScreen: React.FC = () => {
+  const { data, fetchData } = useInfiniteScrollList();
+
   return (
     <View style={styles.container}>
       <InfiniteScrollList
-        data={DATA}
+        data={data}
         height={58 + 16}
-        onEndReached={() => null}
+        onEndReached={fetchData}
       />
     </View>
   );
