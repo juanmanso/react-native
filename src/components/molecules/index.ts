@@ -1,2 +1,3 @@
-export { DisappearingList } from './DisappearingList/DisappearingList';
-export { LoadingPressable } from './LoadingPressable/LoadingPressable';
+export {DisappearingList} from './DisappearingList/DisappearingList';
+export {InfiniteScrollList} from './InfiniteScrollList/InfiniteScrollList';
+export {LoadingPressable} from './LoadingPressable/LoadingPressable';
