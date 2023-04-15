@@ -1,22 +1,18 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import {
-  useSharedValue,
-  withRepeat,
-  withTiming,
-} from 'react-native-reanimated';
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useSharedValue, withRepeat, withTiming} from 'react-native-reanimated';
 
-import { LoadingGradient, PlaygroundButton } from 'src/components/atoms';
-import { LoadingPressable } from 'src/components/molecules';
+import {LoadingGradient, PlaygroundButton} from 'src/components/atoms';
+import {LoadingPressable} from 'src/components/molecules';
 
 interface IMainScreen extends NativeStackScreenProps<any, any> {}
 
-export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
+export const MainScreen: React.FC<IMainScreen> = ({navigation}) => {
   const progress = useSharedValue(0);
 
   useEffect(() => {
-    progress.value = withRepeat(withTiming(1, { duration: 5000 }), -1);
+    progress.value = withRepeat(withTiming(1, {duration: 5000}), -1);
   }, []);
 
   return (
@@ -34,8 +30,7 @@ export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
       <View style={styles.separator} />
       <LoadingPressable
         onPress={() => alert('LoadingPressable pressed')}
-        style={styles.loadingPressable}
-      >
+        style={styles.loadingPressable}>
         <Text style={styles.label}>LoadingPressable</Text>
       </LoadingPressable>
       <View style={styles.separator} />
@@ -47,9 +42,13 @@ export const MainScreen: React.FC<IMainScreen> = ({ navigation }) => {
       </PlaygroundButton>
       <View style={styles.separator} />
       <PlaygroundButton
-        onPress={() => navigation.navigate('DisappearingListScreen')}
-      >
+        onPress={() => navigation.navigate('DisappearingListScreen')}>
         <Text>DisappearingListScreen</Text>
+      </PlaygroundButton>
+      <View style={styles.separator} />
+      <PlaygroundButton
+        onPress={() => navigation.navigate('InfiniteScrollListScreen')}>
+        <Text>InfiniteScrollListScreen</Text>
       </PlaygroundButton>
     </View>
   );
